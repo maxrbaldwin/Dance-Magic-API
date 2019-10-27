@@ -1,0 +1,32 @@
+{
+  "name": "dance-magic-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "dev": "NODE_ENV=dev nodemon src/index.js",
+    "start": "NODE_ENV=production node src/index.js",
+    "test": "NODE_ENV=test mocha tests/*.test.js --timeout 60000 --exit"
+  },
+  "author": "maxrbaldwin",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "express-validator": "^6.1.1",
+    "module-alias": "^2.2.1"
+  },
+  "_moduleAliases": {
+    "@server": "./src/index.js",
+    "@routes": "./src/routes",
+    "@utils": "./src/utils",
+    "@logging": "./src/logging",
+    "@tests": "./tests"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
+    "mocha": "^6.2.0"
+  }
+}
