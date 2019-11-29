@@ -3,6 +3,8 @@ const { parse: parseUrl } = require('url');
 const bodyParser = require('body-parser');
 const { log } = require('@logging');
 const { serverError, invalidJSON } = require('@utils/responses');
+// sets listeners
+const listener = require('@listener');
 
 // configure the body parser
 Router.use(bodyParser.json());
@@ -29,6 +31,7 @@ Router.use((req, res, next) => {
 // All Routes
 Router.use('/', require('@routes/home'));
 Router.use('/api/contact', require('@routes/contact'));
+Router.use('/api/inquiries', require('@routes/inquiries'));
 
 // middleware to handle 404s
 Router.use((req, res, next) => {
