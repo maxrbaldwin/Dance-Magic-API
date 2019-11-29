@@ -20,7 +20,7 @@
   },
   "_moduleAliases": {
     "@server": "./src/index.js",
-    "@emitter": "./src/emitter/index.js",
+    "@emitter": "./src/emitter",
     "@listener": "./src/emitter/listener.js",
     "@routes": "./src/routes",
     "@utils": "./src/utils",
