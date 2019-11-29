@@ -1,4 +1,6 @@
 const emitter = require('@emitter');
+const getFollowUpEmail = require('@emitter/utils/getFollowUpEmail');
+const getInquiryEmail = require('@emitter/utils/getInquiryEmail');
 const isProduction = require('@utils/isProduction');
 const sgMail = require('@sendgrid/mail');
 
@@ -9,36 +11,37 @@ const myEmail = 'maxrbaldwin2328@gmail.com'
 const momsEmail = isPrd ? 'baldwin1255@comcast.net' : myEmail 
 
 emitter.on('sendFollowUp', body => {
-  const { email } = body;
+  const { email, name } = body;
   const reciever = isPrd ? email : myEmail;
+  const followUpEmail = getFollowUpEmail(name);
   const msg = {
     to: reciever,
     from: momsEmail,
-    subject: 'Thanks for reaching out to Dance Magic',
-    text: 'Here is text follow up',
+    html: followUpEmail,
   };
   
   try {
     sgMail.send(msg);
   } catch (err) {
-    console.log('Error send follow up');
+    emitter.emit('error', 'Error send follow up');
   }
 })
 
-emitter.on('sendToReceiver', body => {
+emitter.on('sendInquiry', body => {
   const msg = {
     to: momsEmail,
     from: myEmail,
     subject: 'New Inquiry from Dance Magic Website',
-    text: 'here is text recieve',
+    html: getInquiryEmail(body),
   };
   
   try {
     sgMail.send(msg);
   } catch (err) {
-    console.log('Error send follow up');
+    emitter.emit('error', 'Error sending to receive');
   }
 })
+
 emitter.on('error', () => {
 
 })
