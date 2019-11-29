@@ -2,8 +2,6 @@ const Router = require('express').Router();
 const { body, validationResult } = require('express-validator');
 const { withValidationErrors } = require('@utils/responses');
 const emitter = require('@emitter');
-// sets listeners
-const listener = require('@listener');
 
 /*
   @Routes /api/contact 
@@ -66,7 +64,7 @@ Router.use('/', [
 // Response 200
 Router.post('/', (req, res) => {
   emitter.emit('sendFollowUp', req.body)
-  emitter.emit('sendToReceiver', req.body)
+  emitter.emit('sendInquiry', req.body)
   res.status(200).send('all good')
 });
 
