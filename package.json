@@ -11,6 +11,7 @@
   "author": "maxrbaldwin",
   "license": "ISC",
   "dependencies": {
+    "@sendgrid/mail": "^6.4.0",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
@@ -19,6 +20,8 @@
   },
   "_moduleAliases": {
     "@server": "./src/index.js",
+    "@emitter": "./src/emitter/index.js",
+    "@listener": "./src/emitter/listener.js",
     "@routes": "./src/routes",
     "@utils": "./src/utils",
     "@logging": "./src/logging",
