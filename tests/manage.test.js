@@ -22,14 +22,28 @@ describe('GET /api/inquiries/manage test cron to delete 30 day old inquiries', (
   })
 
   it ('Get resolved inquiries older than 30 days old and delete them using methods from emitter', async () => {
-    const oldInquiries = await fetchResolvedInquiries();
+    let oldInquiries = [];
+    try {
+      oldInquiries = await fetchResolvedInquiries();
+    } catch (err) {
+      console.log('error fetching resolved inquiries in test: ', err);
+    }
     expect(oldInquiries.length).to.equal(5);
 
-    for (let index = 0; index < oldInquiries.length; index++) {
-      await deleteInquiry(oldInquiries[index]);
+    try {
+      for (let index = 0; index < oldInquiries.length; index++) {
+        await deleteInquiry(oldInquiries[index]);
+      }
+    } catch (err) {
+      console.log('error deleting old inquiries in testing: ', err);
     }
 
-    const testInquiries = await fetchTestInquiries(testRef);
+    let testInquiries = [];
+    try {
+      testInquiries = await fetchTestInquiries(testRef);
+    } catch (err) {
+      console.log('error fetching test inquiries while testing: ', err);
+    }
     expect(testInquiries.length).to.equal(0);
   });
 });
