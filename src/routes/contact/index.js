@@ -1,5 +1,6 @@
 const Router = require('express').Router();
 const { body, validationResult } = require('express-validator');
+const uuidv1 = require('uuid/v1');
 const { withValidationErrors } = require('@utils/responses');
 const emitter = require('@emitter');
 
@@ -61,9 +62,15 @@ Router.use('/', [
     next();
   }
 });
+
+// create ref
+Router.use('/', (req, res, next) => {
+  req.body.ref = uuidv1();
+  next();
+});
+
 // Response 200
 Router.post('/', (req, res) => {
-  emitter.emit('sendFollowUp', req.body)
   emitter.emit('sendInquiry', req.body)
   res.status(200).send('all good')
 });
