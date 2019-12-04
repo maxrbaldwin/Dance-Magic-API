@@ -2,13 +2,17 @@
 const path = require('path');
 const { Datastore } = require('@google-cloud/datastore');
 const { log } = require('@logging');
+const isProduction = require('@utils/isProduction');
+
+const isPrd = isProduction();
+const isDev = !isPrd;
 // Create a new client
 const datastore = new Datastore({
   projectId: process.env.PROJECT_ID,
-  keyFilename: path.join(__dirname, '../../', 'creds', 'dmc.json'),
+  ...isDev && { keyFilename: path.join(__dirname, '../../', 'creds', 'dmc.json')},
 });
 const namespace = 'inquiry';
-const kind = process.env.NODE_ENV === 'production' ? 'contact' : 'test';
+const kind = isPrd ? 'contact' : 'test';
 const logLevel = 'db';
 // if the user passes the same email it will update their entry instead of creating a new one
 // that is because of the key
