@@ -29,8 +29,8 @@ module.exports.saveInquiry = body => {
       await datastore.save(inquiry);
       log(logLevel, message);
       return resolve(inquiry);
-    } catch (e) {
-      console.log('Err: ', e)
+    } catch (err) {
+      log(logLevel, `Err: ${err}`);
       return reject(e);
     }
   });
@@ -47,6 +47,7 @@ module.exports.fetchByRef = ref => {
       const singleResult = results[0].reduce((acc, entry) => entry, {});
       return resolve(singleResult);
     } catch(err) {
+      log(logLevel, `Err: ${err}`);
       return reject(err);
     }
   })
@@ -73,19 +74,23 @@ module.exports.fetchResolvedInquiries = () => {
       }, []);
       return resolve(staleInquiries);
     } catch(err) {
+      log(logLevel, `Err: ${err}`);
       return reject(err);
     }
   })
 }
 
 module.exports.deleteInquiry = inquiry => {
-  const { email } = inquiry;
+  const { email, ref } = inquiry;
+  const message = `deleted ${ref}`;
   const taskKey = datastore.key({ namespace: namespace, path: [kind, email] });
  return new Promise(async (resolve, reject) => {
   try {
     await datastore.delete(taskKey);
+    log(logLevel, message);
     resolve()
   } catch (err) {
+    log(logLevel, `Err: ${err}`);
     reject(err);
   }
  })
@@ -101,6 +106,7 @@ module.exports.fetchTestInquiries = testRef => {
       const results = await datastore.runQuery(query);
       return resolve(results[0]);
     } catch(err) {
+      log(logLevel, `Err: ${err}`);
       return reject(err);
     }
   })
