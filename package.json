@@ -11,12 +11,14 @@
   "author": "maxrbaldwin",
   "license": "ISC",
   "dependencies": {
+    "@google-cloud/datastore": "^5.0.0",
     "@sendgrid/mail": "^6.4.0",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "express-validator": "^6.1.1",
-    "module-alias": "^2.2.1"
+    "module-alias": "^2.2.1",
+    "uuid": "^3.3.3"
   },
   "_moduleAliases": {
     "@server": "./src/index.js",
@@ -25,7 +27,8 @@
     "@routes": "./src/routes",
     "@utils": "./src/utils",
     "@logging": "./src/logging",
-    "@tests": "./tests"
+    "@tests": "./tests",
+    "@db": "./src/db"
   },
   "devDependencies": {
     "chai": "^4.2.0",
