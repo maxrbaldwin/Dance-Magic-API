@@ -53,3 +53,23 @@ module.exports.withAlternativePhoneFormat = {
   phone: validPhone2,
   message: validMessage,
 }
+
+module.exports.testInquiry = {
+  name: 'Test Test',
+  email: `test5678@gmail.com`,
+  phone: validPhone,
+  message: validMessage,
+  ref: '5678',
+  when: new Date().setDate(new Date().getDate() - 31),
+  resolved: false,
+}
+
+module.exports.getManageTestInquiry = index => ({
+  name: 'Test Test',
+  email: `test${index}@gmail.com`,
+  phone: validPhone,
+  message: validMessage,
+  ref: '1234',
+  when: new Date().setDate(new Date().getDate() - 30),
+  resolved: true,
+})
