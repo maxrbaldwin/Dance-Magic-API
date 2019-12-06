@@ -1,6 +1,2 @@
 runtime: nodejs
 env: flex
-env_variables:
-  SENDGRID_API_KEY: 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
-  PROJECT_ID: dance-magic-259922
-  HOST: dancemagicnj.com
