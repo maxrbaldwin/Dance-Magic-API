@@ -1,52 +1,53 @@
 const emitter = require('@emitter');
 const { log } = require('@logging');
-const getFollowUpEmail = require('@emitter/utils/getFollowUpEmail');
-const getInquiryEmail = require('@emitter/utils/getInquiryEmail');
 const isProduction = require('@utils/isProduction');
 const { saveInquiry, deleteInquiry } = require('@db');
-const sgMail = require('@sendgrid/mail');
-
-sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+const getFollowUpEmail = require('@emitter/utils/getFollowUpEmail');
+const getInquiryEmail = require('@emitter/utils/getInquiryEmail');
+const getEmailTransporter = require('@emitter/utils/getEmailTransporter');
 
 const isPrd = isProduction();
+const mailerEmail = process.env.EMAIL_USER;
 const myEmail = 'maxrbaldwin2328@gmail.com'
 const momsEmail = isPrd ? 'baldwin1255@comcast.net' : myEmail
 
 // CONTACT EMITTER
-emitter.on('sendInquiry', body => {
+emitter.on('sendInquiry', async body => {
   if (process.env.NODE_ENV === 'test') return;
 
+  const transporter = getEmailTransporter();
   const msg = {
     to: momsEmail,
-    from: myEmail,
+    from: mailerEmail,
     subject: 'New Inquiry from Dance Magic Website',
     html: getInquiryEmail(body),
   };
   
   try {
-    sgMail.send(msg);
+    await transporter.sendMail(msg);
     emitter.emit('sendFollowUp', body)
   } catch (err) {
-    emitter.emit('error', 'Error sending inquiry');
+    emitter.emit('error', `Error sending inquiry: ${err}`);
   }
 })
 
-emitter.on('sendFollowUp', body => {
+emitter.on('sendFollowUp', async body => {
   const { email, name } = body;
   const reciever = isPrd ? email : myEmail;
   const followUpEmail = getFollowUpEmail(name);
+  const transporter = getEmailTransporter();
   const msg = {
     to: reciever,
-    from: momsEmail,
+    from: mailerEmail,
     subject: 'Thanks for reaching out to Dance Magic',
     html: followUpEmail,
   };
   
   try {
-    sgMail.send(msg);
+    await transporter.sendMail(msg);
     emitter.emit('saveInquiry', body);
   } catch (err) {
-    emitter.emit('error', 'Error send follow up');
+    emitter.emit('error', `Error send follow up: ${err}`);
   }
 })
 
