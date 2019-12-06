@@ -111,3 +111,18 @@ module.exports.fetchTestInquiries = testRef => {
     }
   })
 }
+
+module.exports.fetchEnvironmentVariables = () => {
+  const query = datastore
+    .createQuery('environment', 'secret');
+
+  return new Promise(async (resolve, reject) => {
+    try {
+      const results = await datastore.runQuery(query);
+      return resolve(results[0]);
+    } catch (err) {
+      log(logLevel, `Err: ${err}`);
+      return reject(err);
+    }
+  })
+}
