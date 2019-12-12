@@ -3,8 +3,6 @@ const { parse: parseUrl } = require('url');
 const bodyParser = require('body-parser');
 const { log } = require('@logging');
 const { serverError, invalidJSON } = require('@utils/responses');
-// sets listeners
-const listener = require('@listener');
 
 // configure the body parser
 Router.use(bodyParser.json());
