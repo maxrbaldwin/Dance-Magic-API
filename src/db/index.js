@@ -67,7 +67,7 @@ module.exports.fetchResolvedInquiries = () => {
         const timeDiff = new Date(now) - new Date(when);
         const diffInDays = Math.floor(timeDiff/1000/60/60/24);
         // if when is 30 days or more ago
-        if (diffInDays >= 30) {
+        if (diffInDays > 30) {
           acc.push(inquiry);
         }
         return acc;
@@ -114,7 +114,7 @@ module.exports.fetchTestInquiries = testRef => {
 
 module.exports.fetchEnvironmentVariables = () => {
   const query = datastore
-    .createQuery('environment', 'secret');
+    .createQuery('environment', 'secret')
 
   return new Promise(async (resolve, reject) => {
     try {

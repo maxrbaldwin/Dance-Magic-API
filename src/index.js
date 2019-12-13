@@ -10,6 +10,8 @@ const PORT = process.env.PORT || 9000;
 
 // handle cors
 app.use(cors());
+// set event listeners
+app.use(require('@emitter'));
 // configure all routes
 app.use('/', require('@routes'));
 
