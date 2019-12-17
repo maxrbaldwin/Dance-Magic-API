@@ -6,6 +6,10 @@ const validMessage = 'Contrary to popular belief, Lorem Ipsum is not simply rand
 const validToken = 'thisisafaketoken'
 
 
+module.exports.emptyData = {
+  token: validToken,
+}
+
 module.exports.validData = () => ({
   name: validName,
   email: validEmail,
