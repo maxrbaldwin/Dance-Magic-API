@@ -4,6 +4,12 @@ const bodyParser = require('body-parser');
 const { log } = require('@logging');
 const { serverError, invalidJSON } = require('@utils/responses');
 
+// routes
+const home = require('@routes/home')
+const contact = require('@routes/contact');
+const inquiries = require('@routes/inquiries')
+const recaptcha = require('@routes/recaptcha')
+
 // configure the body parser
 Router.use(bodyParser.json());
 Router.use(bodyParser.urlencoded({ extended: false }));
@@ -27,9 +33,11 @@ Router.use((req, res, next) => {
   next();
 });
 // All Routes
-Router.use('/', require('@routes/home'));
-Router.use('/api/contact', require('@routes/contact'));
-Router.use('/api/inquiries', require('@routes/inquiries'));
+Router.use('/', home)
+// order  matters here. recaptcha should come before contact to validate request
+Router.use('/api/contact', recaptcha)
+Router.use('/api/contact', contact)
+Router.use('/api/inquiries', inquiries)
 
 // middleware to handle 404s
 Router.use((req, res, next) => {
@@ -45,10 +53,11 @@ Router.use(function (err, req, res, next) {
     const level = 'res';
     const message = res.locals.error ? JSON.stringify(res.locals.error) : {};
     log(level, message);
-    res.status(400).json({ error: res.locals.error });
+    res.status(400).json({ ...res.locals.error });
     return;
   }
-  res.status(500).json({ error: serverError.code })
+  log('error', JSON.stringify(err));
+  res.status(500).json({ ...serverError })
 })
 
 module.exports = Router;
