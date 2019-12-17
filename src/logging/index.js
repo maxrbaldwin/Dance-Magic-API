@@ -1,10 +1,10 @@
 const path = require('path');
 const isProduction = require('@utils/isProduction');
-// const Logging = require('@google-cloud/logging');
-// const { ErrorReporting } = require('@google-cloud/error-reporting');
+const { Logging } = require('@google-cloud/logging');
+const { ErrorReporting } = require('@google-cloud/error-reporting');
 
-// const projectId = 'nyt-addfpmonitor-dev';
-// const keyFilename = path.join(__dirname, '../../', 'credentials/serviceAccount.json');
+const getProjectId = () => process.env.PROJECT_ID
+const keyFilename = path.join(__dirname, '../../', 'creds/dmc.json');
 
 const getTimeStamp = () => {
   const currentdate = new Date();
@@ -14,15 +14,11 @@ const getTimeStamp = () => {
   return datetime;
 };
 
-const getLogging = () => {}
-  // new Logging({
-  //   projectId,
-  // });
-const getErrorReporting = () => {}
-  // new ErrorReporting({
-  //   projectId,
-  //   keyFilename,
-  // });
+const getLogging = () => new Logging({ projectId: getProjectId() });
+const getErrorReporting = () => {
+  console.log(getProjectId())
+  return new ErrorReporting({ projectId: getProjectId(), keyFilename })
+}
 
 const logging = isProduction() ? getLogging() : {};
 const errors = isProduction() ? getErrorReporting() : {};
@@ -45,7 +41,7 @@ async function log(level, message, type = 'global') {
   const metadata = { resource: { type } };
   const entry = writeTo.entry(metadata, text);
 
-  await log.write(entry).catch(err => {
+  await writeTo.write(entry).catch(err => {
     logError(err);
   });
 }
