@@ -1,7 +1,7 @@
 const Router = require('express').Router();
 const { body, validationResult } = require('express-validator');
 const uuidv1 = require('uuid/v1');
-const { withValidationErrors } = require('@utils/responses');
+const { withValidationErrors, successResponse } = require('@utils/responses');
 const emitter = require('@emitter');
 
 /*
@@ -10,12 +10,10 @@ const emitter = require('@emitter');
   - Check required params goes first because an error in phone validation would trip that error message
 */
 
-const getValidationErrors = errorsArray => {
-  return errorsArray.map(error => error.msg).toString();
-}
-// body('name').isAlpha().not().isEmpty().withMessage('Letters only. No numbers or characters'),
+const getValidationErrors = errorsArray =>  errorsArray.map(error => error.msg).join(', ')
+
 // Check required params
-Router.use('/', [
+Router.post('/', [
   body('name').custom(name => {
     const nameRegex = RegExp('^[a-zA-Z ]*$');
     if (name === undefined || name.length === 0) {
@@ -23,7 +21,7 @@ Router.use('/', [
     }
 
     if (!nameRegex.test(name)) {
-      throw new Error('Letters only. No numbers or special characters');
+      throw new Error('Name must have letters only. No numbers or special characters');
     }
     return true;
   }),
@@ -42,7 +40,7 @@ Router.use('/', [
 });
 
 // checks phone number. is not required
-Router.use('/', [
+Router.post('/', [
   body('phone').isMobilePhone().withMessage('Must be valid phone number'),
 ], (req, res, next) => {
   const { errors } = validationResult(req);
@@ -64,7 +62,7 @@ Router.use('/', [
 });
 
 // create ref
-Router.use('/', (req, res, next) => {
+Router.post('/', (req, res, next) => {
   req.body.ref = uuidv1();
   next();
 });
@@ -72,7 +70,7 @@ Router.use('/', (req, res, next) => {
 // Response 200
 Router.post('/', (req, res) => {
   emitter.emit('sendInquiry', req.body)
-  res.status(200).send('all good')
+  res.status(200).json({ data: successResponse })
 });
 
 module.exports = Router;

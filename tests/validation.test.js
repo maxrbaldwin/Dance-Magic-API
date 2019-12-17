@@ -11,7 +11,7 @@ const {
   withInvalidEmail,
   phoneWithLetters,
   phoneWithSpecialCharacters,
-  withAlternativePhoneFormat
+  withAlternativePhoneFormat,
 } = require('@tests/mockData');
 
 chai.use(chaiHttp);

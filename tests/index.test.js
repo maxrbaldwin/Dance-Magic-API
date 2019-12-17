@@ -7,6 +7,7 @@ const should = chai.should();
 
 const {
   validData,
+  emptyData,
 } = require('@tests/mockData');
 
 chai.use(chaiHttp);
@@ -37,7 +38,7 @@ describe('POST /api/contact', () => {
   it('without data, should return 400', done => {
     chai.request(server)
       .post('/api/contact')
-      .send({})
+      .send(emptyData)
       .end((err, res) => {
         res.should.have.status(400);
         done();
@@ -47,9 +48,11 @@ describe('POST /api/contact', () => {
 
 describe('POST /api/contact', () => {
   it('with valid data, should return 200', done => {
+    const data = validData();
+
     chai.request(server)
       .post('/api/contact')
-      .send(validData())
+      .send(data)
       .end((err, res) => {
         res.should.have.status(200);
         done();
