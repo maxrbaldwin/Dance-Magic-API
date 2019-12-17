@@ -8,7 +8,7 @@ const getEmailTransporter = require('@emitter/utils/getEmailTransporter');
 
 const app = express();
 const isPrd = isProduction();
-const mailerEmail = process.env.EMAIL_USER;
+const getMailerEmail = () => process.env.EMAIL_USER;
 const myEmail = 'maxrbaldwin2328@gmail.com'
 const momsEmail = isPrd ? 'baldwin1255@comcast.net' : myEmail
 
@@ -19,7 +19,7 @@ app.on('sendInquiry', async body => {
   const transporter = getEmailTransporter();
   const msg = {
     to: momsEmail,
-    from: mailerEmail,
+    from: getMailerEmail(),
     subject: 'New Inquiry from Dance Magic Website',
     html: getInquiryEmail(body),
   };
@@ -39,7 +39,7 @@ app.on('sendFollowUp', async body => {
   const transporter = getEmailTransporter();
   const msg = {
     to: reciever,
-    from: mailerEmail,
+    from: getMailerEmail(),
     subject: 'Thanks for reaching out to Dance Magic',
     html: followUpEmail,
   };
