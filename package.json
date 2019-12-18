@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "NODE_ENV=dev nodemon src/index.js",
     "start": "NODE_ENV=production node src/index.js",
-    "test": "NODE_ENV=test mocha tests/*.test.js --timeout 60000 --exit"
+    "test": "NODE_ENV=test mocha tests/*.test.js --timeout 60000 --exit",
+    "encrypt-env": "gcloud kms encrypt --key=secrets --keyring=env-api --plaintext-file=env/.env --ciphertext-file=env/.env.encrypted --location=us-east1",
+    "decrypt-env": "gcloud kms decrypt --key=secrets --keyring=env-api --plaintext-file=env/.env --ciphertext-file=env/.env.encrypted --location=us-east1"
   },
   "author": "maxrbaldwin",
   "license": "ISC",
@@ -15,6 +17,7 @@
     "axios": "^0.19.0",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-validator": "^6.1.1",
     "module-alias": "^2.2.1",
