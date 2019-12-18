@@ -1,2 +1,6 @@
 /creds
 ./creds
+
+.env
+/env/.env
+./env/.env
