@@ -18,10 +18,11 @@ async function encryptAndSaveEnv() {
   let encryptedEnvVars = []
   try {
     const root = envVars.results
+    const symbol = envVars.symbol
     for (let index = 0; index < root.length; index++) {
       const { key, value } = root[index]
       const encryptedData = await encrypt(value, keyring, keyName);
-      encryptedEnvVars.push({ key, value: encryptedData, path: root[index][envVars.symbol].path })
+      encryptedEnvVars.push({ key, value: encryptedData, path: root[index][symbol].path })
     }
   } catch (err) {
     console.log('Error encrypting env vars: ', err);
