@@ -119,10 +119,30 @@ module.exports.fetchEnvironmentVariables = () => {
   return new Promise(async (resolve, reject) => {
     try {
       const results = await datastore.runQuery(query);
-      return resolve(results[0]);
+      return resolve({ results: results[0], symbol: datastore.KEY });
     } catch (err) {
       log(logLevel, `Err: ${err}`);
       return reject(err);
     }
   })
+}
+
+module.exports.saveEnvironmentalVariables = (key, value, path) => {
+  // kind secret is what we have. kind id is in db as what we want
+  const taskKey = datastore.key({ namespace: 'environment', path: path });
+  const inquiry = {
+    key: taskKey,
+    data: { key, value },
+  }
+  return new Promise(async (resolve, reject) => {
+    try {
+      const message = `saved env var ${key}`;
+      await datastore.save(inquiry);
+      log(logLevel, message);
+      return resolve(inquiry);
+    } catch (err) {
+      log(logLevel, `Err: ${err}`);
+      return reject(e);
+    }
+  });
 }
