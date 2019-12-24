@@ -1,9 +1,9 @@
 require('module-alias/register');
-require('dotenv').config({ path: './env/.env' });
 
 const express = require('express');
 const cors = require('cors');
 const { log } = require('@logging');
+const setEnvironment = require('@utils/setEnvironment');
 
 const app = express();
 const PORT = process.env.PORT || 9000;
@@ -20,7 +20,14 @@ app.use('/', require('@routes'));
 app.listen(PORT, async () => {
   const level = 'app';
   const message = `Server started. Listening on port ${PORT}`;
+  try {
+    await setEnvironment();
+  } catch (err) {
+    log('error', `error setting env vars: ${err}`);
+  }
   log(level, message);
+}).on('error', err => {
+  log('error', `error starting app: ${err}`);
 })
 // for tests
 module.exports = app;
