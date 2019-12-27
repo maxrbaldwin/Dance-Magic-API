@@ -9,7 +9,6 @@ const isDev = !isPrd;
 // Create a new client
 const datastore = new Datastore({
   projectId: process.env.PROJECT_ID,
-  ...isDev && { keyFilename: path.join(__dirname, '../../', 'creds', 'dmc.json')},
 });
 const namespace = 'inquiry';
 const kind = isPrd ? 'contact' : 'test';
@@ -110,39 +109,4 @@ module.exports.fetchTestInquiries = testRef => {
       return reject(err);
     }
   })
-}
-
-module.exports.fetchEnvironmentVariables = () => {
-  const query = datastore
-    .createQuery('environment', 'secret')
-
-  return new Promise(async (resolve, reject) => {
-    try {
-      const results = await datastore.runQuery(query);
-      return resolve({ results: results[0], symbol: datastore.KEY });
-    } catch (err) {
-      log(logLevel, `Err: ${err}`);
-      return reject(err);
-    }
-  })
-}
-
-module.exports.saveEnvironmentalVariables = (key, value, path) => {
-  // kind secret is what we have. kind id is in db as what we want
-  const taskKey = datastore.key({ namespace: 'environment', path: path });
-  const inquiry = {
-    key: taskKey,
-    data: { key, value },
-  }
-  return new Promise(async (resolve, reject) => {
-    try {
-      const message = `saved env var ${key}`;
-      await datastore.save(inquiry);
-      log(logLevel, message);
-      return resolve(inquiry);
-    } catch (err) {
-      log(logLevel, `Err: ${err}`);
-      return reject(e);
-    }
-  });
 }

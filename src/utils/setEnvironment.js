@@ -1,9 +1,5 @@
-const { fetchEnvironmentVariables } = require('@db');
-const { decrypt } = require('@tools/encrypt');
+const { decryptEnvironment } = require('dance-magic/packages/environment');
 const { log } = require('@logging');
-
-const keyring = 'environment';
-const keyName = 'secrets';
 
 const serverEnvVars = [
   'HOST',
@@ -17,14 +13,10 @@ const serverEnvVars = [
 module.exports = () => {
   return new Promise(async (resolve, reject) => {
     try {
-      const envVars = await fetchEnvironmentVariables();
-      const root = envVars.results;
-      for (let index = 0; index < root.length; index++) {
-        const { key, value } = root[index]
-        const decryptedValue = await decrypt(value, keyring, keyName)
-        if (serverEnvVars.indexOf(key) > -1) {
-          process.env[key] = decryptedValue.plaintext.toString();
-        }
+      const envVars = await decryptEnvironment(serverEnvVars);
+      for (let index = 0; index < envVars.length; index++) {
+        const { key, value } = envVars[index]
+        process.env[key] = value
       }
       resolve()
     } catch(err) {
