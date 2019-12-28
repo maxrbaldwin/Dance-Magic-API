@@ -17,7 +17,7 @@ const logLevel = 'db';
 // that is because of the key
 module.exports.saveInquiry = body => {
   const { email, ref, resolved, when } = body;
-  const taskKey = datastore.key({ namespace: namespace, path: [kind, email] });
+  const taskKey = datastore.key({ namespace: namespace, path: [kind] });
   const inquiry = {
     key: taskKey,
     data: { ...body, resolved: resolved || false, when: when || Date.now() },
