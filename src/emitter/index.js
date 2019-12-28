@@ -1,4 +1,5 @@
 const express = require('express');
+const { encryptObject } = require('dance-magic/packages/encryption')
 const { log } = require('@logging');
 const isProduction = require('@utils/isProduction');
 const { saveInquiry, deleteInquiry } = require('@db');
@@ -53,8 +54,13 @@ app.on('sendFollowUp', async body => {
 })
 
 app.on('saveInquiry', async body => {
+  const keyring = 'db'
+  const key = 'users'
+  const { email, name, phone, message, ref, token } = body;
+  const toEncrypt = { email, name, phone, message }
   try {
-    await saveInquiry(body);
+    const inquiry = await encryptObject(toEncrypt, keyring, key)
+    await saveInquiry({ ref, token, ...inquiry });
   } catch (err) {
     app.emit('emitterError', 'Error saving inquiry');
   }
