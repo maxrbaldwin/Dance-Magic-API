@@ -1,6 +1,6 @@
 const Router = require('express').Router();
 const { body, validationResult } = require('express-validator');
-const uuidv1 = require('uuid/v1');
+const getWebToken = require('@utils/getWebToken');
 const { withValidationErrors, successResponse } = require('@utils/responses');
 const emitter = require('@emitter');
 
@@ -63,7 +63,8 @@ Router.post('/', [
 
 // create ref
 Router.post('/', (req, res, next) => {
-  req.body.ref = uuidv1();
+  const { email, token } = req.body;
+  req.body.ref = getWebToken(email, token)
   next();
 });
 
