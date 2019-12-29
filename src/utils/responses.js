@@ -50,5 +50,9 @@ module.exports = {
   successResponse: {
     code: 14,
     message: 'form submitted successfully'
+  },
+  decryptionFailed: {
+    code: 15,
+    message: 'error decrypting data'
   }
 };
