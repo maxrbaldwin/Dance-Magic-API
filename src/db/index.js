@@ -16,8 +16,8 @@ const logLevel = 'db';
 // if the user passes the same email it will update their entry instead of creating a new one
 // that is because of the key
 module.exports.saveInquiry = body => {
-  const { email, ref, resolved, when } = body;
-  const taskKey = datastore.key({ namespace: namespace, path: [kind] });
+  const { ref, resolved, when } = body;
+  const taskKey = datastore.key({ namespace: namespace, path: [kind, ref] });
   const inquiry = {
     key: taskKey,
     data: { ...body, resolved: resolved || false, when: when || Date.now() },
@@ -80,9 +80,9 @@ module.exports.fetchResolvedInquiries = () => {
 }
 
 module.exports.deleteInquiry = inquiry => {
-  const { email, ref } = inquiry;
+  const { ref } = inquiry;
   const message = `deleted ${ref}`;
-  const taskKey = datastore.key({ namespace: namespace, path: [kind, email] });
+  const taskKey = datastore.key({ namespace: namespace, path: [kind, ref] });
  return new Promise(async (resolve, reject) => {
   try {
     await datastore.delete(taskKey);
@@ -95,10 +95,10 @@ module.exports.deleteInquiry = inquiry => {
  })
 }
 
-module.exports.fetchTestInquiries = testRef => {
+module.exports.fetchTestInquiries = () => {
   const query = datastore
     .createQuery(namespace, 'test')
-    .filter('ref', testRef);
+    .filter('name', 'Test Test');
   
   return new Promise(async (resolve, reject) => {
     try {
