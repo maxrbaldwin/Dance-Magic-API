@@ -7,7 +7,7 @@
     "dev": "GOOGLE_APPLICATION_CREDENTIALS=./creds/dmc.json NODE_ENV=dev nodemon src/index.js",
     "start": "NODE_ENV=production node src/index.js",
     "test": "GOOGLE_APPLICATION_CREDENTIALS=./creds/dmc.json NODE_ENV=test mocha tests/*.test.js --timeout 60000 --exit",
-    "shared-update": "npm install --save github:maxrbaldwin/Dance-Magic-Shared"
+    "update-shared": "npm install --save github:maxrbaldwin/Dance-Magic-Shared"
   },
   "author": "maxrbaldwin",
   "license": "ISC",
@@ -20,9 +20,9 @@
     "dance-magic": "github:maxrbaldwin/Dance-Magic-Shared",
     "express": "^4.17.1",
     "express-validator": "^6.1.1",
+    "jsonwebtoken": "^8.5.1",
     "module-alias": "^2.2.1",
-    "nodemailer": "^6.4.0",
-    "uuid": "^3.3.3"
+    "nodemailer": "^6.4.0"
   },
   "_moduleAliases": {
     "@server": "./src/index.js",
