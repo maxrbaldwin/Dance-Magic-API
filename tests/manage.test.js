@@ -5,8 +5,6 @@ const { saveInquiry, fetchResolvedInquiries, deleteInquiry, fetchTestInquiries }
 const { getManageTestInquiry  } = require('@tests/mockData');
 const expect = chai.expect;
 
-const testRef = '1234';
-
 describe('GET /api/inquiries/manage test cron to delete 30 day old inquiries', () => {
   const limit = 5;
 
@@ -40,7 +38,7 @@ describe('GET /api/inquiries/manage test cron to delete 30 day old inquiries', (
 
     let testInquiries = [];
     try {
-      testInquiries = await fetchTestInquiries(testRef);
+      testInquiries = await fetchTestInquiries();
     } catch (err) {
       console.log('error fetching test inquiries while testing: ', err);
     }
