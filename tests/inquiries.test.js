@@ -63,6 +63,10 @@ describe('GET /api/inquiries/resolve with valid params', () => {
   });
 
   after(async () => {
-    await deleteInquiry(testInquiry);
+    try {
+      await deleteInquiry(testInquiry);
+    } catch (err) {
+      console.log('delete err: ', err);
+    }
   })
 })
