@@ -1,6 +1,7 @@
 const Router = require('express').Router();
+const { decryptObject } = require('dance-magic/packages/encryption')
 const emitter = require('@emitter');
-const { noRef, fetchRefFailed, failedSaveOnResolve, invalidApiKey } = require('@utils/responses');
+const { noRef, fetchRefFailed, failedSaveOnResolve, invalidApiKey, decryptionFailed } = require('@utils/responses');
 const { resolveContact, getResolveMessage } = require('@routes/inquiries/resolveContact');
 const { fetchByRef, saveInquiry } = require('@db');
 
@@ -38,12 +39,28 @@ Router.use('/resolve', (req, res, next) => {
     next();
   }
 })
+// decrypt body
+Router.use('/resolve', async (req, res, next) => {
+  const keyring = 'db'
+  const key = 'users'
+  const { name, email } = res.locals.contact
+  try {
+    const decryptedResult = await decryptObject({ name, email }, keyring, key)
+    res.locals.template = decryptedResult
+    next()
+  } catch(err) {
+    res.locals.error = decryptionFailed
+    next(decryptionFailed)
+  }
+})
 // set resolve true
 Router.get('/resolve', async (req, res) => {
+  const contact = res.locals.contact
+  const template = res.locals.template
   try {
-    const resolvedContact = resolveContact(res.locals.contact);
-    const result = await saveInquiry(resolvedContact);
-    const resolveMessage = getResolveMessage(result.data);
+    const resolvedContact = resolveContact(contact);
+    const resolveMessage = getResolveMessage(template);
+    await saveInquiry(resolvedContact);
     res.status(200).send(resolveMessage);
   } catch(err) {
     res.locals.error = failedSaveOnResolve;
