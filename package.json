@@ -10,7 +10,8 @@
   "scripts": {
     "dev": "GOOGLE_APPLICATION_CREDENTIALS=./creds/dmc.json NODE_ENV=dev nodemon src/index.js",
     "start": "NODE_ENV=production node src/index.js",
-    "test": "GOOGLE_APPLICATION_CREDENTIALS=./creds/dmc.json NODE_ENV=test mocha tests/*.test.js --timeout 60000 --exit",
+    "test": "NODE_ENV=test mocha tests/*.test.js --timeout 60000 --exit",
+    "test-local": "GOOGLE_APPLICATION_CREDENTIALS=./creds/dmc.json npm run test",
     "shared-update": "npm install --save github:maxrbaldwin/Dance-Magic-Shared"
   },
   "author": "maxrbaldwin",
