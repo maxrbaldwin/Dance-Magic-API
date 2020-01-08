@@ -1,0 +1,13 @@
+# install node modules
+steps:
+- name: 'gcr.io/cloud-builders/npm'
+  args: ['install']
+# run tests
+- name: 'gcr.io/cloud-builders/npm'
+  args: ['run', 'test']
+# deploy cron
+- name: 'gcr.io/cloud-builders/gcloud'
+  args: ['app', 'deploy', 'cron.yaml']
+# deploy
+- name: 'gcr.io/cloud-builders/gcloud'
+  args: ['app', 'deploy', 'app.yaml']
