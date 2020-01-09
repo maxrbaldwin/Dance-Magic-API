@@ -3,6 +3,7 @@ require('module-alias/register');
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const server = require('@server');
+const { encryptObject } = require('dance-magic/packages/encryption')
 const { saveInquiry, deleteInquiry } = require('@db');
 const { testInquiry } = require('@tests/mockData');
 
@@ -39,7 +40,12 @@ describe('GET /api/inquiries/resolve with invalid params', () => {
 
 describe('GET /api/inquiries/resolve with valid params', () => {
   before(async () => {
-    await saveInquiry(testInquiry);
+    const keyring = 'db'
+    const key = 'users'
+    const { email, name, phone, message, ref, token } = testInquiry;
+    const toEncrypt = { email, name, phone, message }
+    const inquiry = await encryptObject(toEncrypt, keyring, key)
+    await saveInquiry({ ref, token, ...inquiry });
   })
   
   it('resolves a valid inquiry expect 200 and valid text', done => {

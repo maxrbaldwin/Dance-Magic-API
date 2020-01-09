@@ -17,7 +17,7 @@ module.exports = {
   },
   noRef: {
     code: 5,
-    message: 'message no user reference provided',
+    message: 'no user reference provided',
   },
   fetchRefFailed: {
     code: 6,

@@ -20,6 +20,7 @@ module.exports.saveInquiry = body => {
   const taskKey = datastore.key({ namespace: namespace, path: [kind, ref] });
   const inquiry = {
     key: taskKey,
+    excludeFromIndexes: ['message'],
     data: { ...body, resolved: resolved || false, when: when || Date.now() },
   }
   return new Promise(async (resolve, reject) => {
@@ -30,7 +31,7 @@ module.exports.saveInquiry = body => {
       return resolve(inquiry);
     } catch (err) {
       log(logLevel, `Err: ${err}`);
-      return reject(e);
+      return reject(err);
     }
   });
 }
