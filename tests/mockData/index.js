@@ -73,7 +73,7 @@ module.exports.testInquiry = {
   email: `test5678@gmail.com`,
   phone: validPhone,
   message: validMessage,
-  ref: '5678',
+  ref: uuidv1(),
   when: new Date().setDate(new Date().getDate() - 31),
   resolved: false,
 }
