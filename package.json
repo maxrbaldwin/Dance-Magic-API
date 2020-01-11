@@ -8,10 +8,10 @@
     "npm": ">=6"
   },
   "scripts": {
-    "dev": "GOOGLE_APPLICATION_CREDENTIALS=./creds/dmc.json NODE_ENV=dev nodemon src/index.js",
+    "dev": "GOOGLE_APPLICATION_CREDENTIALS=$GOOGLE_APPLICATION_CREDENTIALS/dmc.json NODE_ENV=dev ./node_modules/.bin/nodemon src/index.js",
     "start": "NODE_ENV=production node src/index.js",
     "test": "NODE_ENV=test mocha tests/*.test.js --timeout 60000 --exit",
-    "test-local": "GOOGLE_APPLICATION_CREDENTIALS=./creds/dmc.json npm run test",
+    "test-local": "GOOGLE_APPLICATION_CREDENTIALS=$GOOGLE_APPLICATION_CREDENTIALS/dmc.json npm run test",
     "shared-update": "npm install --save github:maxrbaldwin/Dance-Magic-Shared"
   },
   "author": "maxrbaldwin",
@@ -42,6 +42,7 @@
   "devDependencies": {
     "chai": "^4.2.0",
     "chai-http": "^4.3.0",
-    "mocha": "^6.2.0"
+    "mocha": "^6.2.0",
+    "nodemon": "^2.0.2"
   }
 }
