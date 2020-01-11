@@ -6,6 +6,7 @@ const { serverError, invalidJSON } = require('@utils/responses');
 
 // routes
 const home = require('@routes/home')
+const healthCheck = require('@routes/health')
 const contact = require('@routes/contact');
 const inquiries = require('@routes/inquiries')
 const recaptcha = require('@routes/recaptcha')
@@ -34,6 +35,7 @@ Router.use((req, res, next) => {
 });
 // All Routes
 Router.use('/', home)
+Router.use('/.health', healthCheck)
 // order  matters here. recaptcha should come before contact to validate request
 Router.use('/api/contact', recaptcha)
 Router.use('/api/contact', contact)
