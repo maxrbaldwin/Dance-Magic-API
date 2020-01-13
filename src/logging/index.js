@@ -61,7 +61,7 @@ const loggerMap = {
 }
 
 module.exports = {
-  log: loggerMap['production'],
+  log: loggerMap[process.env.NODE_ENV],
   logError: isProduction() ? logError : logErrorDev,
   withErrorObject,
 };
