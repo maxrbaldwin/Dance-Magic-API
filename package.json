@@ -8,7 +8,7 @@
     "npm": ">=6"
   },
   "scripts": {
-    "dev": "GOOGLE_APPLICATION_CREDENTIALS=$GOOGLE_APPLICATION_CREDENTIALS/dmc.json NODE_ENV=dev ./node_modules/.bin/nodemon src/index.js",
+    "dev": "GOOGLE_APPLICATION_CREDENTIALS=./creds/dmc.json NODE_ENV=dev node_modules/.bin/nodemon src/index.js",
     "start": "NODE_ENV=production node src/index.js",
     "test": "NODE_ENV=test mocha tests/*.test.js --timeout 60000 --exit",
     "test-local": "GOOGLE_APPLICATION_CREDENTIALS=$GOOGLE_APPLICATION_CREDENTIALS/dmc.json npm run test",
@@ -18,7 +18,9 @@
   "license": "ISC",
   "dependencies": {
     "@google-cloud/datastore": "^5.0.0",
+    "@google-cloud/error-reporting": "^1.1.3",
     "@google-cloud/kms": "^1.5.3",
+    "@google-cloud/logging": "^7.0.0",
     "axios": "^0.19.0",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",

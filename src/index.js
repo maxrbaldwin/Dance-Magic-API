@@ -16,8 +16,8 @@ app.use(cors());
 app.use(require('@emitter'));
 // configure all routes
 app.use('/', require('@routes'));
-
-app.listen(PORT, async () => {
+// https://stackoverflow.com/questions/42283599/node-server-running-but-localhost-refusing-to-connect
+app.listen(PORT, '0.0.0.0', async () => {
   const level = 'app';
   const message = `Server started. Listening on port ${PORT}`;
   try {
