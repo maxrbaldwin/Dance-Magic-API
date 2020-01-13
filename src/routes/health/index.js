@@ -9,7 +9,7 @@ const format = seconds => {
 }
 
 Router.get('/', (req, res) => {
-  const uptimeSeconds = process.uptime
+  const uptimeSeconds = process.uptime()
   const uptime = format(uptimeSeconds)
   res.status(200).json({ uptime, status: 200 })
 })
