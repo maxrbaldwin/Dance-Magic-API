@@ -27,9 +27,8 @@ Router.use(function (error, req, res, next) {
 // log all requests
 Router.use((req, res, next) => {
   const level = 'req';
-  const body = req.body ? JSON.stringify(req.body) : {};
   const { pathname } = parseUrl(req.url);
-  const message = `route: ${pathname} : body: ${body}`;
+  const message = `route: ${pathname}`;
   log(level, message);
   next();
 });
