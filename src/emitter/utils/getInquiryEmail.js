@@ -3,9 +3,17 @@ const isProduction = require('@utils/isProduction');
 const isPrd = isProduction();
 
 const getDeleteRoute = ref => {
-  const host = process.env.HOST;
-  const deleteHost = isPrd ? host : 'http://localhost:9000';
-  return url.resolve(deleteHost, `/api/inquiries/resolve?ref=${ref}`);
+  const protocol = isPrd ? 'https' : 'http';
+  const hostname = isPrd ? 'dance-magic-api-dot-dance-magic-259922.appspot.com' : 'localhost';
+  const pathname = '/api/inquiries/resolve';
+  const query = { ref }
+  return url.format({
+    protocol,
+    hostname,
+    pathname,
+    query,
+    ... !isPrd && { port: 9000 }
+  });
 }
 
 const getInquiryEmail = ({ email, message, phone, name, ref }) => `
