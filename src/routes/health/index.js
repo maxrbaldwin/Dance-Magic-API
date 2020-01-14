@@ -1,11 +1,12 @@
 const Router = require('express').Router()
 
 const format = seconds => {
-  var hours = Math.floor(seconds / (60*60));
-  var minutes = Math.floor(seconds % (60*60) / 60);
-  var seconds = Math.floor(seconds % 60);
+  const days = Math.floor(seconds / (3600*24));
+  const hours = Math.floor(seconds / (60*60));
+  const minutes = Math.floor(seconds % (60*60) / 60);
+  const secs = Math.floor(seconds % 60);
 
-  return `${hours} : ${minutes} : ${seconds}`
+  return `${days} : ${hours} : ${minutes} : ${secs}`
 }
 
 Router.get('/', (req, res) => {
