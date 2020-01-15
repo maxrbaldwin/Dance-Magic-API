@@ -38,6 +38,7 @@ Router.use('/.health', healthCheck)
 // order  matters here. recaptcha should come before contact to validate request
 Router.use('/api/contact', recaptcha)
 Router.use('/api/contact', contact)
+// manager routes
 Router.use('/api/inquiries', inquiries)
 
 // middleware to handle 404s
@@ -57,7 +58,7 @@ Router.use(function (err, req, res, next) {
     res.status(400).json({ ...res.locals.error });
     return;
   }
-  log('error', JSON.stringify(err));
+  log('error', err);
   res.status(500).json({ ...serverError })
 })
 
