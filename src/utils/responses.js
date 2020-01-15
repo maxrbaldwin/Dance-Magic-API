@@ -54,5 +54,9 @@ module.exports = {
   decryptionFailed: {
     code: 15,
     message: 'error decrypting data'
+  },
+  noUserFound: {
+    code: 16,
+    message: 'no user found to resolve'
   }
 };
