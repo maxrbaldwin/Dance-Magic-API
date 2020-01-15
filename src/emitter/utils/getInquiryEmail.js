@@ -16,7 +16,7 @@ const getDeleteRoute = ref => {
   });
 }
 
-const getInquiryEmail = ({ email, message, phone, name, ref }) => `
+const getInquiryEmail = ({ email, message, phone = 'not provided', name, ref }) => `
   <div>
     <h2>Miss Dawn!</h2>
     <h2>This is the BoBo cloud! You have a new inquiry from your website!</h2>

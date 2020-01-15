@@ -1,7 +1,7 @@
 const Router = require('express').Router();
 const { decryptObject } = require('dance-magic/packages/encryption')
 const emitter = require('@emitter');
-const { noRef, fetchRefFailed, failedSaveOnResolve, invalidApiKey, decryptionFailed } = require('@utils/responses');
+const { noRef, fetchRefFailed, failedSaveOnResolve, invalidApiKey, decryptionFailed, noUserFound } = require('@utils/responses');
 const { resolveContact, getResolveMessage } = require('@routes/inquiries/resolveContact');
 const { fetchByRef, saveInquiry } = require('@db');
 
@@ -31,7 +31,7 @@ Router.use('/resolve', async (req, res, next) => {
 Router.use('/resolve', (req, res, next) => {
   const { ref, email, resolved } = res.locals.contact
   if (!ref || !email) {
-    res.locals.error = noRef;
+    res.locals.error = noUserFound;
     next(noRef)
   } else if (resolved === true) {
     res.status(200).send('already resolved');

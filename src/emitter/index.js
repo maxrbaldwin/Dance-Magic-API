@@ -57,7 +57,7 @@ app.on('saveInquiry', async body => {
   const keyring = 'db'
   const key = 'users'
   const { email, name, phone, message, ref, token } = body;
-  const toEncrypt = { email, name, phone, message }
+  const toEncrypt = { email, name, message, ...phone && { phone } }
   try {
     const inquiry = await encryptObject(toEncrypt, keyring, key)
     await saveInquiry({ ref, token, ...inquiry });
