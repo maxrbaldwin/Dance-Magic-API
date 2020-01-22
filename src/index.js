@@ -10,10 +10,10 @@ const setEnvironment = require('@utils/setEnvironment');
 const app = express();
 const PORT = process.env.PORT || 9000;
 
-// enable preflight check for all routes
-app.options('*', cors(corsOptions))
 // handle cors
 app.use(cors(corsOptions));
+// enable preflight check for all routes
+app.options('*', cors(corsOptions))
 // log all request
 app.use(logRequests)
 // to get user's ip address
