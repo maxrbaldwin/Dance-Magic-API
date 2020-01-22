@@ -3,12 +3,15 @@ require('module-alias/register');
 const express = require('express');
 const cors = require('cors');
 const { log } = require('@logging');
+const logRequests = require('@logging/logRequests');
 const corsOptions = require('@utils/corsOptions');
 const setEnvironment = require('@utils/setEnvironment');
 
 const app = express();
 const PORT = process.env.PORT || 9000;
 
+// log all request
+app.use(logRequests)
 // enable preflight check for all routes
 app.options('*', cors(corsOptions))
 // handle cors
