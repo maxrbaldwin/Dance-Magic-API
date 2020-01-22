@@ -13,9 +13,9 @@ const PORT = process.env.PORT || 9000;
 // log all request
 app.use(logRequests)
 // enable preflight check for all routes
-app.options('*', cors(corsOptions))
+app.options('*', cors())
 // handle cors
-app.use(cors(corsOptions));
+app.use(cors());
 // to get user's ip address
 app.set('trust proxy', true)
 // set event listeners
