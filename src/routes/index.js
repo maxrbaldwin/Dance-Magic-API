@@ -1,5 +1,4 @@
 const Router = require('express').Router();
-const { parse: parseUrl } = require('url');
 const bodyParser = require('body-parser');
 const { log } = require('@logging');
 const { serverError, invalidJSON } = require('@utils/responses');
@@ -22,15 +21,6 @@ Router.use(function (error, req, res, next) {
   } else {
     next();
   }
-});
-
-// log all requests
-Router.use((req, res, next) => {
-  const level = 'req';
-  const { pathname } = parseUrl(req.url);
-  const message = `route: ${pathname}`;
-  log(level, message);
-  next();
 });
 // All Routes
 Router.use('/', home)
