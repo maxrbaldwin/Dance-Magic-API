@@ -3,6 +3,7 @@ require('module-alias/register');
 const express = require('express');
 const cors = require('cors');
 const { log } = require('@logging');
+const corsOptions = require('@utils/corsOptions');
 const setEnvironment = require('@utils/setEnvironment');
 
 const app = express();
@@ -11,7 +12,7 @@ const PORT = process.env.PORT || 9000;
 // to get user's ip address
 app.set('trust proxy', true)
 // handle cors
-app.use(cors());
+app.use(cors(corsOptions));
 // set event listeners
 app.use(require('@emitter'));
 // configure all routes
