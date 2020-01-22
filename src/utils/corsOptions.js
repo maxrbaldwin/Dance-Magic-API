@@ -13,5 +13,6 @@ module.exports = {
     } else {
       callback(new Error('Cors: Not on whitelist'))
     }
-  }
+  },
+  preflightContinue: true,
 }
