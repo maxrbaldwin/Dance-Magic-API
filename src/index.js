@@ -11,10 +11,10 @@ const PORT = process.env.PORT || 9000;
 
 // enable preflight check for all routes
 app.options('*', cors(corsOptions))
-// to get user's ip address
-app.set('trust proxy', true)
 // handle cors
 app.use(cors(corsOptions));
+// to get user's ip address
+app.set('trust proxy', true)
 // set event listeners
 app.use(require('@emitter'));
 // configure all routes

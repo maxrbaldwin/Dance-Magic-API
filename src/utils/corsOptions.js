@@ -14,5 +14,9 @@ module.exports = {
       callback(new Error('Cors: Not on whitelist'))
     }
   },
-  credentials: true
+  methods: ['GET', 'POST'],
+  optionsSuccessStatus: 200,
+  preflightContinue: true,
+  credentials: true,
+  maxAge: 86400,
 }
