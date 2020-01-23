@@ -15,8 +15,4 @@ module.exports = {
     }
   },
   methods: ['GET', 'POST', 'OPTIONS'],
-  optionsSuccessStatus: 200,
-  preflightContinue: true,
-  credentials: true,
-  maxAge: 86400,
 }
