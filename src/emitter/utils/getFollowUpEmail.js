@@ -3,14 +3,14 @@ const getFollowUpEmail = name => `
   <h1>Thank you for reaching out to Dance Magic</h1>
   <div style="text-align: left;">
     <h2>Hi ${name},</h2>
-    <p>Thank you for your interest in Dance Magic. We will get back to you as soon as we can. In the meantime, information about class tuition, class structure and recitals is below. Our studio policies are outlined on our policy page. Please follow us on <a href="https://www.facebook.com/Dance-Magic-424482520956394" target="_blank">Facebook</a> for community updates.</p>
+    <p>Thank you for your interest in Dance Magic. We will get back to you as soon as we can. In the meantime, information about class tuition, class structure and recitals is below. Our studio <a href="https://dancemagicnj.com/policies/" target="_blank">policies</a> are outlined on our <a href="https://dancemagicnj.com/policies/" target="_blank">policy page</a>. Please follow us on <a href="https://www.facebook.com/Dance-Magic-424482520956394" target="_blank">Facebook</a> for community updates.</p>
   </div>
   <div style="margin: 20px 0px;">
     <img alt="Dance Class Image" src="https://storage.googleapis.com/dance-magic-images/home/classes.gif" />
   </div>
   <div style="text-align: left;">
     <h2>Tuition</h2>
-    <p>Tuition is $55.00 per month. $55.00 is for one class per week for a total of 4 weeks or 1 month. If a student wishes to attend more than 1 class per week, tuition will be an additional $43.00 per month for that additional class. Tuition is due by the first week of every month. Tuition paid after the 15th day of each month will be charged an additional $25.00 late fee. There will be a total of 8 ½ payments from September to the end of May. The June payment is determined by the date of our annual recital. All technique classes will be $40.00. Please see our policy page for tuition information about holidays and missed classes.</p>
+    <p>Tuition is $55.00 per month. $55.00 is for one class per week for a total of 4 weeks or 1 month. If a student wishes to attend more than 1 class per week, tuition will be an additional $43.00 per month for that additional class. Tuition is due by the first week of every month. Tuition paid after the 15th day of each month will be charged an additional $25.00 late fee. There will be a total of 8 ½ payments from September to the end of May. The June payment is determined by the date of our annual recital. All technique classes will be $40.00. Please see our <a href="https://dancemagicnj.com/policies/" target="_blank">policy page</a> for tuition information about holidays and missed classes.</p>
   </div>
   <div style="text-align: left;">
     <h2>Class Structure</h2>
@@ -30,6 +30,7 @@ const getFollowUpEmail = name => `
       <li style="padding: 10px 0px;"><b>Creative:</b> Pink leotard, pink tights, pink ballet shoes.</li>
       <li style="padding: 10px 0px;"><b>Hip hop:</b> Black dance pants or capri length pants, t-shirt and sneakers.</li>
     </ul>
+    <p>Students are required to wear their hair in a ponytail or bun in all dance classes. No jewelry. No street clothes are to be work during dance class.</p>
   </div>
   <div style="text-align: left;">
     <h2>Annual Recital</h2>
