@@ -1,0 +1,19 @@
+{
+    "name": "Dance Magic Api",
+    "description": "Contact API for Dance Magic, New Jersey, Official Website",
+    "keywords": [
+      "NodeJS",
+      "ExpressJS",
+      "Dance Magic"
+    ],
+    "website": "https://dancemagicnj.com",
+    "repository": "https://github.com/maxrbaldwin/Dance-Magic-API",
+    "image": "heroku/nodejs",
+    "environments": {
+      "test": {
+        "scripts": {
+          "test": "npm run test"
+        }
+      }
+    }
+  }
