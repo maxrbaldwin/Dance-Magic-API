@@ -1,4 +1,0 @@
-cron:
-- description: "Check for stale inquiries every day"
-  url: /api/inquiries/manage
-  schedule: every 24 hours synchronized
