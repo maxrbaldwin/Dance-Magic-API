@@ -7,7 +7,6 @@ const { serverError, invalidJSON } = require('@utils/responses');
 const home = require('@routes/home')
 const healthCheck = require('@routes/health')
 const contact = require('@routes/contact');
-const inquiries = require('@routes/inquiries')
 const recaptcha = require('@routes/recaptcha')
 
 // configure the body parser
@@ -28,8 +27,6 @@ Router.use('/.health', healthCheck)
 // order  matters here. recaptcha should come before contact to validate request
 Router.use('/api/contact', recaptcha)
 Router.use('/api/contact', contact)
-// manager routes
-Router.use('/api/inquiries', inquiries)
 
 // middleware to handle 404s
 Router.use((req, res, next) => {
