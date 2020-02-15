@@ -27,6 +27,6 @@ const loggerMap = {
 
 module.exports = {
   log: loggerMap[process.env.NODE_ENV],
-  logError: isProduction() ? logError : logErrorDev,
+  logError: logErrorDev,
   withErrorObject,
 };
