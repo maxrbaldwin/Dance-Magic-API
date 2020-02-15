@@ -73,17 +73,5 @@ module.exports.testInquiry = {
   email: `test5678@gmail.com`,
   phone: validPhone,
   message: validMessage,
-  ref: uuidv1(),
-  when: new Date().setDate(new Date().getDate() - 31),
-  resolved: false,
+  token: validToken,
 }
-
-module.exports.getManageTestInquiry = index => ({
-  name: 'Test Test',
-  email: `test${index}@gmail.com`,
-  phone: validPhone,
-  message: validMessage,
-  ref: uuidv1(),
-  when: new Date().setDate(new Date().getDate() - 31),
-  resolved: true,
-})
