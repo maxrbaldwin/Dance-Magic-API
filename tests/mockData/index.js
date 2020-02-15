@@ -1,5 +1,3 @@
-const uuidv1 = require('uuid/v1');
-
 const validName = 'Max Baldwin';
 const validEmail = 'maxrbaldwin2328@gmail.com';
 const validPhone = '609-385-5472';
