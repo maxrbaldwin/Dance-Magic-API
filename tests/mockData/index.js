@@ -1,5 +1,3 @@
-const uuidv1 = require('uuid/v1');
-
 const validName = 'Max Baldwin';
 const validEmail = 'maxrbaldwin2328@gmail.com';
 const validPhone = '609-385-5472';
@@ -73,17 +71,5 @@ module.exports.testInquiry = {
   email: `test5678@gmail.com`,
   phone: validPhone,
   message: validMessage,
-  ref: uuidv1(),
-  when: new Date().setDate(new Date().getDate() - 31),
-  resolved: false,
+  token: validToken,
 }
-
-module.exports.getManageTestInquiry = index => ({
-  name: 'Test Test',
-  email: `test${index}@gmail.com`,
-  phone: validPhone,
-  message: validMessage,
-  ref: uuidv1(),
-  when: new Date().setDate(new Date().getDate() - 31),
-  resolved: true,
-})
