@@ -1,5 +1,5 @@
 # Dance-Magic-API
-<img src="https://brand.heroku.com/static/media/built-on-heroku-light.21a0c1f7.svg" alt="built on heroku" width="200" height="50" style="background-color:#430098" />
+<img src="https://res.cloudinary.com/hyk1rhlzp/image/upload/v1582149880/dance-magic/Screenshot_2020-02-19_at_5.02.16_PM_rscboi.png" alt="built on heroku" />
 
 ## Dependencies
 - Node ^8.13.0 || >=10.10.0
