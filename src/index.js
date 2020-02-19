@@ -5,7 +5,6 @@ const cors = require('cors');
 const { log } = require('@logging');
 const logRequests = require('@logging/logRequests');
 const corsOptions = require('@utils/corsOptions');
-const setEnvironment = require('@utils/setEnvironment');
 
 const app = express();
 const PORT = process.env.PORT || 9000;
@@ -26,11 +25,6 @@ app.use('/', require('@routes'));
 app.listen(PORT, '0.0.0.0', async () => {
   const level = 'app';
   const message = `Server started. Listening on port ${PORT}`;
-  try {
-    await setEnvironment();
-  } catch (err) {
-    log('error', `error setting env vars: ${err}`);
-  }
   log(level, message);
 }).on('error', err => {
   log('error', `error starting app: ${err}`);

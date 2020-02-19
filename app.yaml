@@ -1,3 +1,0 @@
-service: dance-magic-api
-env: flex
-runtime: nodejs

@@ -1,5 +1,5 @@
 const whitelist = [
-  'https://dance-magic-259922.appspot.com',
+  'https://dance-magic.herokuapp.com',
   'https://dancemagicnj.com',
   'https://www.dancemagicnj.com',
   'http://localhost:8000',
