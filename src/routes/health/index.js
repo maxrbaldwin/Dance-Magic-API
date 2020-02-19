@@ -13,8 +13,8 @@ const getUptime = () => {
 const getHealth = () => ({
   status: 200,
   uptime:  getUptime(),
-  build: process.env.BUILD_ID || 'N/A',
-  hash: process.env.COMMIT_SHA || 'N/A',
+  release: process.env.HEROKU_RELEASE_VERSION || 'N/A',
+  commit: process.env.HEROKU_SLUG_COMMIT || 'N/A',
 })
 
 Router.get('/', (req, res) => {
