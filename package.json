@@ -10,9 +10,7 @@
   "scripts": {
     "dev": "NODE_ENV=dev node_modules/.bin/nodemon src/index.js",
     "start": " NODE_ENV=production node src/index.js",
-    "test": "NODE_ENV=test mocha tests/*.test.js --timeout 60000 --exit",
-    "test-local": "npm run test",
-    "shared-update": "npm install --save github:maxrbaldwin/Dance-Magic-Shared"
+    "test": "NODE_ENV=test mocha tests/*.test.js --timeout 60000 --exit"
   },
   "author": "maxrbaldwin",
   "license": "ISC",
@@ -20,7 +18,6 @@
     "axios": "^0.19.0",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
-    "dance-magic": "git+https://0bf8c2dc1387a25c63ba20737d148ae1638f0682:x-oauth-basic@github.com/maxrbaldwin/Dance-Magic-Shared",
     "express": "^4.17.1",
     "express-validator": "^6.1.1",
     "module-alias": "^2.2.1",
