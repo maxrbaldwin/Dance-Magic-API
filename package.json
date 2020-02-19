@@ -20,7 +20,6 @@
     "axios": "^0.19.0",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
-    "dance-magic": "git+https://0bf8c2dc1387a25c63ba20737d148ae1638f0682:x-oauth-basic@github.com/maxrbaldwin/Dance-Magic-Shared",
     "express": "^4.17.1",
     "express-validator": "^6.1.1",
     "module-alias": "^2.2.1",
