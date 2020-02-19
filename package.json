@@ -10,9 +10,7 @@
   "scripts": {
     "dev": "NODE_ENV=dev node_modules/.bin/nodemon src/index.js",
     "start": " NODE_ENV=production node src/index.js",
-    "test": "NODE_ENV=test mocha tests/*.test.js --timeout 60000 --exit",
-    "test-local": "npm run test",
-    "shared-update": "npm install --save github:maxrbaldwin/Dance-Magic-Shared"
+    "test": "NODE_ENV=test mocha tests/*.test.js --timeout 60000 --exit"
   },
   "author": "maxrbaldwin",
   "license": "ISC",
