@@ -2,7 +2,8 @@
 <img src="https://brand.heroku.com/static/media/built-on-heroku-light.21a0c1f7.svg" alt="built on heroku" width="200" height="50" style="background-color:#430098" />
 
 ## Dependencies
-- Node JS >= 10
+- Node ^8.13.0 || >=10.10.0
+- npm >=6
 
 ## Summary
 A Node JS, Express application that handles the contact form on Dance Magic Web by validating the user using recaptcha v3 and validating the user's input. Post validation, the owner of Dance Magic is notified via email that their website received and inquiry and the user receives an email with basic information about Dance Magic and dance classes.
@@ -24,3 +25,6 @@ There are a handful of different middleware steps that validate each request and
 
 ## Tests
 Testing uses chai, chai-http and mocha to validate different types of requests that the API might encounter. In the tests directory there is dummy data for valid and invalid use cases.
+
+## Health check
+Hit the route /.health to get the application uptime, heroku release version and git commit hash
