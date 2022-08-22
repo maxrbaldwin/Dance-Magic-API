@@ -9,7 +9,7 @@ const app = express();
 const isPrd = isProduction();
 const getMailerEmail = () => process.env.EMAIL_USER;
 const myEmail = 'maxrbaldwin2328@gmail.com'
-const momsEmail = isPrd ? 'baldwin1255@comcast.net' : myEmail
+const ownerEmail = isPrd ? 'janineschuster@msn.com ' : myEmail
 
 // CONTACT EMITTER
 app.on('sendInquiry', async body => {
@@ -17,7 +17,7 @@ app.on('sendInquiry', async body => {
 
   const transporter = getEmailTransporter();
   const msg = {
-    to: momsEmail,
+    to: ownerEmail,
     from: getMailerEmail(),
     subject: 'New Inquiry from Dance Magic Website',
     html: getInquiryEmail(body),
