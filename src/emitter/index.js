@@ -9,7 +9,7 @@ const app = express();
 const isPrd = isProduction();
 const getMailerEmail = () => process.env.EMAIL_USER;
 const myEmail = 'maxrbaldwin2328@gmail.com'
-const ownerEmail = isPrd ? 'janineschuster@msn.com ' : myEmail
+const ownerEmail = isPrd ? 'janineschuster@msn.com' : myEmail
 
 // CONTACT EMITTER
 app.on('sendInquiry', async body => {
